@@ -1,15 +1,21 @@
 {-# LANGUAGE LambdaCase    #-}
 module Main where
 
+import           Control.Lens
+import qualified Data.Sequence              as S
 import           Data.Text                  (Text)
 import qualified Data.Text.IO               as TIO
 import           Data.Time.Clock
 import           Data.Time.Clock.System
 import           Data.Void
 import           Paths_aoc@day@
+import           Polysemy
+import           Polysemy.Error
+import           Polysemy.State
+import           Polysemy.Trace
 import           System.Directory           (doesFileExist)
 import           System.Environment         (getArgs)
-import           Text.Megaparsec
+import           Text.Megaparsec            hiding (State)
 import           Text.Megaparsec.Char
 import           Text.Megaparsec.Char.Lexer
 

@@ -2,6 +2,7 @@ let
 
   pkgs = import ../nixpkgs.nix;
   inherit (pkgs) lib;
+  hlib = pkgs.haskell.lib;
 
   hpkgs = pkgs.haskell.packages.ghc865.override (old: {
     overrides = lib.composeExtensions (old.overrides or (self: super: {})) (self: super: {
@@ -10,6 +11,8 @@ let
         "^input$"
         "^.*\\.cabal$"
       ]) {};
+
+      polysemy-plugin = hlib.dontCheck (hlib.unmarkBroken super.polysemy-plugin);
     });
   });
   
@@ -18,5 +21,5 @@ let
     nativeBuildInputs = [ hpkgs.cabal-install ];
   };
 in hpkgs.aoc@day@ // {
-  inherit env;
+  inherit env hpkgs;
 }
