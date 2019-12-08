@@ -15,9 +15,6 @@ find "$DEST" -type f \
   -exec sed -i "s/@day@/$DAY/g" {} \; \
 	-exec rename @day@ "$DAY" {} \;
 
-grep "aoc$DAY" "$DIR/cabal.project" >/dev/null || \
-	echo "          ./aoc$DAY" >> "$DIR/cabal.project"
-
 direnv allow "$DEST"
 
 echo "Created new template in $DEST"
